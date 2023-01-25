@@ -10,6 +10,13 @@ const RepositoriesList: React.FC = () => {
     const { data, error, loading } = useTypedSelector((state) => state.repositories)
 
     const onSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
+        // Because I keep coming back, here's the explanation:
+        // When the button is pressed, an http request must fire
+        // to get the data.  searchRepositories() is a function that
+        // is a part of action-creators, which is bound to useDispatch()
+        //
+        // Essentially, the asynchronous call goes to an action creator, and
+        // when it resolves it will dispatch in the callback.
         event.preventDefault()
         searchRepositories(term)
     }
